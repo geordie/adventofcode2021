@@ -1,10 +1,5 @@
 package diagnostics
 
-import (
-	"fmt"
-	"strconv"
-)
-
 type Counter int
 
 type Diagnostic [12]int
@@ -35,12 +30,21 @@ func (d *Diagnostic) Gamma(tot Counter) Diagnostic {
 	return dGamma
 }
 
+func (d *Diagnostic) Epsilon(tot Counter) Diagnostic {
+	var dEpsilon Diagnostic
+	for i, elem := range d {
+		if elem < int(tot)/2 {
+			dEpsilon[i] = 1
+		}
+	}
+	return dEpsilon
+}
+
 func (d *Diagnostic) Int() int {
 	result := 0
 	for _, elem := range d {
 		result = result << 1
 		result = result | elem
-		fmt.Println(elem, strconv.FormatInt(int64(result), 2))
 	}
 	return result
 }
