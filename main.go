@@ -7,14 +7,43 @@ import (
 	"os"
 	"strconv"
 
+	diag "github.com/geordie/adventofcode2021/diagnostics"
 	nav "github.com/geordie/adventofcode2021/navigation"
 )
 
 func main() {
+	day3puzzle1()
 	day2puzzle2()
 	day2puzzle1()
 	day1puzzle1()
 	day1puzzle2()
+}
+
+func day3puzzle1() {
+	file, err := os.Open("input/day3.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var mainD diag.Diagnostic
+
+	total := diag.Counter(0)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		s := scanner.Text()
+		total++
+		d := diag.ParseDiagnostic(s)
+		mainD.Add(d)
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	gamma := mainD.Gamma(total)
+	fmt.Println(mainD)
+	fmt.Println(gamma)
+	fmt.Println(gamma.Int())
+	fmt.Println("DAY 3, ANSWER 1:", total)
 }
 
 func day2puzzle2() {
