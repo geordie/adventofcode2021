@@ -39,11 +39,18 @@ func day3puzzle1() {
 		log.Fatal(err)
 	}
 
-	gamma := mainD.Gamma(total)
-	fmt.Println(mainD)
-	fmt.Println(gamma)
-	fmt.Println(gamma.Int())
-	fmt.Println("DAY 3, ANSWER 1:", total)
+	// Build Gamma
+	dGamma := mainD.Gamma(total)
+	iGamma := dGamma.Int()
+
+	// Build Epsilon
+	dEpsilon := mainD.Epsilon(total)
+	iEpsilon := dEpsilon.Int()
+
+	// Answer is product of Gamma and Epsilon
+	iAnswer := iGamma * iEpsilon
+
+	fmt.Println("DAY 3, ANSWER 1:", iAnswer)
 }
 
 func day2puzzle2() {
