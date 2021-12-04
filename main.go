@@ -13,8 +13,8 @@ import (
 func main() {
 	day2puzzle2()
 	day2puzzle1()
-	//day1puzzle1()
-	//day1puzzle2()
+	day1puzzle1()
+	day1puzzle2()
 }
 
 func day2puzzle2() {
@@ -80,7 +80,7 @@ func day2puzzle1() {
 
 func day1puzzle2() {
 
-	file, err := os.Open("input/day2.txt")
+	file, err := os.Open("input/day1.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -109,7 +109,7 @@ func day1puzzle2() {
 		i3 = i4
 	}
 
-	fmt.Println("ANSWER #2:", iCountOfIncreases)
+	fmt.Println("DAY 1, ANSWER 2:", iCountOfIncreases)
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
@@ -137,7 +137,7 @@ func day1puzzle1() {
 		iLast = iCur
 	}
 
-	fmt.Println("ANSWER #1:", iCountOfIncreases)
+	fmt.Println("DAY 1, ANSWER 1:", iCountOfIncreases)
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
