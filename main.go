@@ -12,11 +12,32 @@ import (
 )
 
 func main() {
+	day3puzzle2()
 	day3puzzle1()
 	day2puzzle2()
 	day2puzzle1()
 	day1puzzle1()
 	day1puzzle2()
+}
+
+func day3puzzle2() {
+	file, err := os.Open("input/day3.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var diagnostics diag.Diagnostics
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		s := scanner.Text()
+		d := diag.ParseDiagnostic(s)
+		diagnostics = append(diagnostics, d)
+	}
+
+	result := diagnostics.Filter(0, diag.O2)
+
+	fmt.Println("O2:", result)
+	fmt.Println("DAY 3, ANSWER 2:")
 }
 
 func day3puzzle1() {
