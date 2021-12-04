@@ -7,7 +7,7 @@ import (
 	"os"
 	"strconv"
 
-	nav "github.com/geordie/adventofcode2021/navigation1"
+	nav "github.com/geordie/adventofcode2021/navigation"
 )
 
 func main() {
