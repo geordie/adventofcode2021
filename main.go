@@ -18,7 +18,7 @@ func main() {
 }
 
 func day2puzzle2() {
-	file, err := os.Open("day2-input.txt")
+	file, err := os.Open("input/day2.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,7 +49,7 @@ func day2puzzle2() {
 }
 
 func day2puzzle1() {
-	file, err := os.Open("day2-input.txt")
+	file, err := os.Open("input/day2.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -80,7 +80,7 @@ func day2puzzle1() {
 
 func day1puzzle2() {
 
-	file, err := os.Open("day1-input.txt")
+	file, err := os.Open("input/day2.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -118,7 +118,7 @@ func day1puzzle2() {
 
 func day1puzzle1() {
 
-	file, err := os.Open("day1-input.txt")
+	file, err := os.Open("input/day1.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
