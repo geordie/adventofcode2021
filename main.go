@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	bingo "github.com/geordie/adventofcode2021/bingo"
 	diag "github.com/geordie/adventofcode2021/diagnostics"
 	nav "github.com/geordie/adventofcode2021/navigation"
 	util "github.com/geordie/adventofcode2021/util"
@@ -22,6 +23,7 @@ func main() {
 }
 
 func day4puzzle1() {
+	bingo.ParseInput("input/day4.txt")
 }
 
 func day3puzzle2() {
