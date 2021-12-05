@@ -66,7 +66,7 @@ func (dArr Diagnostics) Filter(idx int, ft FilterType) Diagnostics {
 
 	// Find the value that occurs most often
 	ones, zeros := 0, 0
-	var dArrO2 Diagnostics
+	var dArrResult Diagnostics
 
 	for _, elem := range dArr {
 		if int(elem[idx]) == 1 {
@@ -76,19 +76,27 @@ func (dArr Diagnostics) Filter(idx int, ft FilterType) Diagnostics {
 		}
 	}
 
-	// Set a boolean to T if one is more comment, F otherwise
-	bMoreOnes := ones > zeros
+	// Set a boolean to T if one is more common, F otherwise
+	bMoreOnes := ones >= zeros
 
-	// Return the subset of values that qualify
+	// Return the subset of values that qualify for the filter
 	for _, elem := range dArr {
+		if bMoreOnes {
+			if ft == O2 && elem[idx] == 1 {
+				dArrResult = append(dArrResult, elem)
+			} else if ft == CO2 && elem[idx] == 0 {
+				dArrResult = append(dArrResult, elem)
+			}
+		} else {
+			if ft == O2 && elem[idx] == 0 {
+				dArrResult = append(dArrResult, elem)
+			} else if ft == CO2 && elem[idx] == 1 {
+				dArrResult = append(dArrResult, elem)
+			}
 
-		if bMoreOnes && elem[idx] == 1 {
-			dArrO2 = append(dArrO2, elem)
-		} else if !bMoreOnes && elem[idx] == 0 {
-			dArrO2 = append(dArrO2, elem)
 		}
 	}
 
 	// Recurse
-	return dArrO2.Filter(idx+1, ft)
+	return dArrResult.Filter(idx+1, ft)
 }

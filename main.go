@@ -34,10 +34,15 @@ func day3puzzle2() {
 		diagnostics = append(diagnostics, d)
 	}
 
-	result := diagnostics.Filter(0, diag.O2)
+	dArrO2 := diagnostics.Filter(0, diag.O2)
+	dO2 := dArrO2[0]
+	iO2 := dO2.Int()
 
-	fmt.Println("O2:", result)
-	fmt.Println("DAY 3, ANSWER 2:")
+	dArrCO2 := diagnostics.Filter(0, diag.CO2)
+	dCO2 := dArrCO2[0]
+	iCO2 := dCO2.Int()
+
+	fmt.Println("DAY 3, ANSWER 2:", iO2*iCO2)
 }
 
 func day3puzzle1() {
