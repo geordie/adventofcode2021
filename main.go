@@ -5,19 +5,23 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
 
 	diag "github.com/geordie/adventofcode2021/diagnostics"
 	nav "github.com/geordie/adventofcode2021/navigation"
+	util "github.com/geordie/adventofcode2021/util"
 )
 
 func main() {
+	day4puzzle1()
 	day3puzzle2()
 	day3puzzle1()
 	day2puzzle2()
 	day2puzzle1()
 	day1puzzle1()
 	day1puzzle2()
+}
+
+func day4puzzle1() {
 }
 
 func day3puzzle2() {
@@ -150,18 +154,18 @@ func day1puzzle2() {
 	scanner := bufio.NewScanner(file)
 
 	scanner.Scan()
-	i1 := getIntFromString(scanner.Text())
+	i1 := util.GetIntFromString(scanner.Text())
 	scanner.Scan()
-	i2 := getIntFromString(scanner.Text())
+	i2 := util.GetIntFromString(scanner.Text())
 	scanner.Scan()
-	i3 := getIntFromString(scanner.Text())
+	i3 := util.GetIntFromString(scanner.Text())
 
 	iLastWindowSum := i1 + i2 + i3
 	iCountOfIncreases := 0
 
 	for scanner.Scan() {
 		s := scanner.Text()
-		i4 := getIntFromString(s)
+		i4 := util.GetIntFromString(s)
 		iCurWindowSum := i2 + i3 + i4
 		if iCurWindowSum > iLastWindowSum {
 			iCountOfIncreases++
@@ -192,7 +196,7 @@ func day1puzzle1() {
 
 	for scanner.Scan() {
 		s := scanner.Text()
-		iCur := getIntFromString(s)
+		iCur := util.GetIntFromString(s)
 		if iCur > iLast {
 			iCountOfIncreases++
 		}
@@ -204,14 +208,4 @@ func day1puzzle1() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-}
-
-func getIntFromString(s string) int {
-	iCur, err := strconv.Atoi(s)
-	if err != nil {
-		// handle error
-		fmt.Println(err)
-		os.Exit(2)
-	}
-	return iCur
 }
