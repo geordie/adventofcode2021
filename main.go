@@ -23,7 +23,9 @@ func main() {
 }
 
 func day4puzzle1() {
-	bingo.ParseInput("input/day4.txt")
+	bingoNums, bingoBoards := bingo.ParseInput("input/day4.txt")
+	_, score := bingoBoards.RunGame(bingoNums)
+	fmt.Println("DAY 4, ANSWER 1:", score)
 }
 
 func day3puzzle2() {
