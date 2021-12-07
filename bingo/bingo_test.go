@@ -67,4 +67,16 @@ func TestIsWinner(t *testing.T) {
 		t.Errorf("winner = %t; want false", got)
 	}
 
+	bb = BingoBoard{}
+	bb = append(bb, []int{-100, -100, -100, -100, -100})
+	bb = append(bb, []int{-100, -100, -100, -100, -100})
+	bb = append(bb, []int{-100, -100, -100, -100, -100})
+	bb = append(bb, []int{-100, -100, -100, -100, -100})
+	bb = append(bb, []int{-100, -100, -100, -100, -100})
+	got = bb.isWinner()
+	fmt.Println("**********************************", got)
+	if got == true {
+		t.Errorf("winner = %t; want false", got)
+	}
+
 }
