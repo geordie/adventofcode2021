@@ -13,6 +13,7 @@ import (
 )
 
 func main() {
+	day4puzzle2()
 	day4puzzle1()
 	day3puzzle2()
 	day3puzzle1()
@@ -20,6 +21,12 @@ func main() {
 	day2puzzle1()
 	day1puzzle1()
 	day1puzzle2()
+}
+
+func day4puzzle2() {
+	bingoNums, bingoBoards := bingo.ParseInput("input/day4.txt")
+	_, score := bingoBoards.RunGameToLose(bingoNums)
+	fmt.Println("DAY 4, ANSWER 2:", score)
 }
 
 func day4puzzle1() {

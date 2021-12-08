@@ -72,6 +72,34 @@ func (bingoBoards BingoBoards) RunGame(bingoNums BingoNumbers) (BingoBoard, int)
 	return winningBoard, winningBoard.Value() * lastNumCalled
 }
 
+func (bingoBoards BingoBoards) RunGameToLose(bingoNums BingoNumbers) (BingoBoard, int) {
+
+	lastNumCalled := 0
+	numBoards := len(bingoBoards)
+	winners := 0
+
+	for _, elem := range bingoNums {
+		lastNumCalled = elem
+		bingoBoards.applyNumberToBoards(elem)
+
+		// Find the last winner
+		var lastWinner BingoBoard
+		isWinner := true
+		for isWinner {
+			lastWinner = bingoBoards.findWinner()
+			isWinner = lastWinner.isWinner()
+			if isWinner {
+				winners++
+			}
+			if winners == numBoards {
+				return lastWinner, lastWinner.Value() * lastNumCalled
+			}
+			lastWinner.Void()
+		}
+	}
+	return BingoBoard{}, 0
+}
+
 func (bingoBoards BingoBoards) applyNumberToBoards(number int) {
 	for _, bingoBoard := range bingoBoards {
 		bingoBoard.applyNumberToBoard(number)
@@ -140,6 +168,14 @@ func (bingoBoard BingoBoard) Value() int {
 	}
 
 	return iResult
+}
+
+func (bingoBoard BingoBoard) Void() {
+	for i, row := range bingoBoard {
+		for j := range row {
+			bingoBoard[i][j] = -100
+		}
+	}
 }
 
 func (bingoBoard BingoBoard) String() string {
