@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	day4puzzle1()
+	day5puzzle1()
 	day4puzzle2()
 	day4puzzle1()
 	day3puzzle2()
@@ -27,6 +27,7 @@ func main() {
 func day5puzzle1() {
 
 }
+
 func day4puzzle2() {
 	bingoNums, bingoBoards := bingo.ParseInput("input/day4.txt")
 	_, score := bingoBoards.RunGameToLose(bingoNums)
