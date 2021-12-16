@@ -8,6 +8,7 @@ import (
 
 	bingo "github.com/geordie/adventofcode2021/bingo"
 	diag "github.com/geordie/adventofcode2021/diagnostics"
+	hydro "github.com/geordie/adventofcode2021/hydrothermals"
 	nav "github.com/geordie/adventofcode2021/navigation"
 	util "github.com/geordie/adventofcode2021/util"
 )
@@ -25,6 +26,9 @@ func main() {
 }
 
 func day5puzzle1() {
+	grid := hydro.ParseInput("input/day5.txt")
+	result := grid.CountNoGos()
+	fmt.Println("ANSWER: ", result)
 
 }
 
