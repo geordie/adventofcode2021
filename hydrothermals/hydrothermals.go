@@ -38,8 +38,8 @@ func ParseInput(sFile string) Grid {
 			continue
 		}
 		lines = append(lines, line)
-		maxX = util.Max(maxX, util.Max(line.x1, line.x2))
-		maxY = util.Max(maxY, util.Max(line.y1, line.y2))
+		maxX = util.Max(maxX, util.Max(line.x1, line.x2)) + 1
+		maxY = util.Max(maxY, util.Max(line.y1, line.y2)) + 1
 	}
 
 	iGrid := make([][]int, maxX)
@@ -69,6 +69,18 @@ func parseLine(sLine string) Line {
 		y2: util.GetIntFromString(sCoordinates[3]),
 	}
 
+	if line.x1 > line.x2 {
+		temp := line.x1
+		line.x1 = line.x2
+		line.x2 = temp
+	}
+
+	if line.y1 > line.y2 {
+		temp := line.y1
+		line.y1 = line.y2
+		line.y2 = temp
+	}
+
 	return line
 }
 
@@ -90,16 +102,11 @@ func (grid Grid) AddLine(line Line) {
 
 	if line.IsHorizontal() {
 		for i := line.y1; i <= line.y2; i++ {
-			if grid.table[line.x1][i] == 0 {
-				grid.table[line.x1][i] = 1
-			} else {
-				grid.table[line.x1][i]++
-			}
+			grid.table[line.x1][i]++
 		}
-	}
-	if line.IsVertical() && !line.IsHorizontal() {
+	} else if line.IsVertical() {
 		for i := line.x1; i <= line.x2; i++ {
-			grid.table[i][line.y1] = grid.table[i][line.y1] + 1
+			grid.table[i][line.y1]++
 		}
 	}
 }
