@@ -43,11 +43,9 @@ func ParseInputPuzzle1(sFile string) Grid {
 	}
 
 	grid := buildGrid(maxX, maxY)
-
 	for _, line := range lines {
-		grid.AddLine(line)
+		grid.AddAnyLine(line)
 	}
-
 	return grid
 }
 
@@ -134,19 +132,6 @@ func (line Line) IsSlopePositive() bool {
 
 func (line Line) IsSlopeNegative() bool {
 	return !line.IsSlopePositive()
-}
-
-func (grid Grid) AddLine(line Line) {
-
-	if line.IsHorizontal() {
-		for i := line.y1; i <= line.y2; i++ {
-			grid.table[line.x1][i]++
-		}
-	} else if line.IsVertical() {
-		for i := line.x1; i <= line.x2; i++ {
-			grid.table[i][line.y1]++
-		}
-	}
 }
 
 func (grid Grid) AddAnyLine(line Line) {
