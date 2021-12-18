@@ -31,7 +31,6 @@ func ParseInputPuzzle1(sFile string) Grid {
 	lines := []Line{}
 	scanner := bufio.NewScanner(file)
 
-	// Get the BingoNumbers for first row of file
 	for scanner.Scan() {
 		line := parseLine(scanner.Text())
 		if !line.IsHorizontal() && !line.IsVertical() {
