@@ -20,7 +20,7 @@ type Grid struct {
 	table [][]int
 }
 
-func ParseInput(sFile string) Grid {
+func ParseInputPuzzle1(sFile string) Grid {
 	file, err := os.Open(sFile)
 	if err != nil {
 		log.Fatal(err)
@@ -42,17 +42,52 @@ func ParseInput(sFile string) Grid {
 		maxY = util.Max(maxY, util.Max(line.y1, line.y2)) + 1
 	}
 
-	iGrid := make([][]int, maxX)
+	grid := buildGrid(maxX, maxY)
+
+	for _, line := range lines {
+		grid.AddLine(line)
+	}
+
+	return grid
+}
+
+func ParseInputPuzzle2(sFile string) Grid {
+	file, err := os.Open(sFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	maxX := 0
+	maxY := 0
+	lines := []Line{}
+	scanner := bufio.NewScanner(file)
+
+	// Get the BingoNumbers for first row of file
+	for scanner.Scan() {
+		line := parseLine(scanner.Text())
+		lines = append(lines, line)
+		maxX = util.Max(maxX, util.Max(line.x1, line.x2)) + 1
+		maxY = util.Max(maxY, util.Max(line.y1, line.y2)) + 1
+	}
+
+	grid := buildGrid(maxX, maxY)
+
+	for _, line := range lines {
+		grid.AddAnyLine(line)
+	}
+
+	return grid
+}
+
+func buildGrid(x int, y int) Grid {
+
+	iGrid := make([][]int, x)
 	for i := range iGrid {
-		iGrid[i] = make([]int, maxY)
+		iGrid[i] = make([]int, y)
 	}
 
 	grid := Grid{
 		table: iGrid,
-	}
-
-	for _, line := range lines {
-		grid.AddLine(line)
 	}
 
 	return grid
@@ -67,18 +102,6 @@ func parseLine(sLine string) Line {
 		y1: util.GetIntFromString(sCoordinates[1]),
 		x2: util.GetIntFromString(sCoordinates[2]),
 		y2: util.GetIntFromString(sCoordinates[3]),
-	}
-
-	if line.x1 > line.x2 {
-		temp := line.x1
-		line.x1 = line.x2
-		line.x2 = temp
-	}
-
-	if line.y1 > line.y2 {
-		temp := line.y1
-		line.y1 = line.y2
-		line.y2 = temp
 	}
 
 	return line
@@ -98,6 +121,21 @@ func (line Line) IsVertical() bool {
 	return false
 }
 
+func (line Line) IsSlopePositive() bool {
+	xDiff := line.x2 - line.x1
+	yDiff := line.y2 - line.y1
+
+	// Avoid dividing by zero
+	if yDiff == 0 {
+		return true
+	}
+	return (xDiff / yDiff) > 0
+}
+
+func (line Line) IsSlopeNegative() bool {
+	return !line.IsSlopePositive()
+}
+
 func (grid Grid) AddLine(line Line) {
 
 	if line.IsHorizontal() {
@@ -107,6 +145,31 @@ func (grid Grid) AddLine(line Line) {
 	} else if line.IsVertical() {
 		for i := line.x1; i <= line.x2; i++ {
 			grid.table[i][line.y1]++
+		}
+	}
+}
+
+func (grid Grid) AddAnyLine(line Line) {
+	minX := util.Min(line.x1, line.x2)
+	maxX := util.Max(line.x1, line.x2)
+	minY := util.Min(line.y1, line.y2)
+	maxY := util.Max(line.y1, line.y2)
+
+	if line.IsHorizontal() {
+		for i := minY; i <= maxY; i++ {
+			grid.table[line.x1][i]++
+		}
+	} else if line.IsVertical() {
+		for i := minX; i <= maxX; i++ {
+			grid.table[i][line.y1]++
+		}
+	} else if line.IsSlopePositive() {
+		for i := 0; i <= maxX-minX; i++ {
+			grid.table[minX+i][minY+i]++
+		}
+	} else if line.IsSlopeNegative() {
+		for i := 0; i <= maxX-minX; i++ {
+			grid.table[minX+i][maxY-i]++
 		}
 	}
 }

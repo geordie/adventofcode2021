@@ -14,6 +14,7 @@ import (
 )
 
 func main() {
+	day5puzzle2()
 	day5puzzle1()
 	day4puzzle2()
 	day4puzzle1()
@@ -25,10 +26,16 @@ func main() {
 	day1puzzle2()
 }
 
-func day5puzzle1() {
-	grid := hydro.ParseInput("input/day5.txt")
+func day5puzzle2() {
+	grid := hydro.ParseInputPuzzle2("input/day5.txt")
 	result := grid.CountNoGos()
-	fmt.Println("ANSWER: ", result)
+	fmt.Println("DAY 5, ANSWER 2:", result)
+}
+
+func day5puzzle1() {
+	grid := hydro.ParseInputPuzzle1("input/day5.txt")
+	result := grid.CountNoGos()
+	fmt.Println("DAY 5, ANSWER 1:", result)
 
 }
 
