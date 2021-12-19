@@ -30,15 +30,15 @@ func main() {
 }
 
 func day6puzzle2() {
-	fishHash := fish.ParseInput2("input/day6.txt")
+	fishHash := fish.ParseInput("input/day6.txt")
 	fishHash = fishHash.IterateModel(256)
 	fmt.Println("DAY 6, ANSWER 2:", fishHash.TotalFish())
 }
 
 func day6puzzle1() {
-	fishList := fish.ParseInput("input/day6.txt")
-	fishList = fishList.IterateModel(80)
-	fmt.Println("DAY 6, ANSWER 1:", len(fishList))
+	fishHash := fish.ParseInput("input/day6.txt")
+	fishHash = fishHash.IterateModel(80)
+	fmt.Println("DAY 6, ANSWER 1:", fishHash.TotalFish())
 }
 
 func day5puzzle2() {
