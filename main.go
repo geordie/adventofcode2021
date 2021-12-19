@@ -9,6 +9,7 @@ import (
 	bingo "github.com/geordie/adventofcode2021/bingo"
 	diag "github.com/geordie/adventofcode2021/diagnostics"
 	hydro "github.com/geordie/adventofcode2021/hydrothermals"
+	fish "github.com/geordie/adventofcode2021/lanternfish"
 	nav "github.com/geordie/adventofcode2021/navigation"
 	util "github.com/geordie/adventofcode2021/util"
 )
@@ -29,9 +30,9 @@ func main() {
 }
 
 func day6puzzle1() {
-	//grid := hydro.ParseInputPuzzle2("input/day5.txt")
-	//result := grid.CountNoGos()
-	fmt.Println("DAY 6, ANSWER 1:")
+	fishList := fish.ParseInput("input/day6.txt")
+	fishList = fishList.IterateModel(80)
+	fmt.Println("DAY 6, ANSWER 1:", len(fishList))
 }
 
 func day5puzzle2() {
