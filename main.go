@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	//day6puzzle2()
+	day6puzzle2()
 	day6puzzle1()
 	day5puzzle2()
 	day5puzzle1()
@@ -27,6 +27,12 @@ func main() {
 	day2puzzle1()
 	day1puzzle1()
 	day1puzzle2()
+}
+
+func day6puzzle2() {
+	fishHash := fish.ParseInput2("input/day6.txt")
+	fishHash = fishHash.IterateModel(256)
+	fmt.Println("DAY 6, ANSWER 2:", fishHash.TotalFish())
 }
 
 func day6puzzle1() {
